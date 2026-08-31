@@ -1,5 +1,6 @@
 # Hint: use a set
 # Have a set for seen values, just check
+from typing import List
 
 class Solution:
     def hasDuplicate(self, nums: List[int]) -> bool:

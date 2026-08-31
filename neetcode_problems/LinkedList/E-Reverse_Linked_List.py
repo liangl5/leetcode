@@ -1,5 +1,19 @@
 # Hint: while head, build reversed list
 
+from typing import Optional
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        pass
+        
+        curr = None
+
+        while head:
+            tmp = ListNode(head.val, curr)
+            curr = tmp
+            head = head.next
+
+        return curr

@@ -1,0 +1,5 @@
+# Hint:
+
+class Solution:
+    def findDuplicate(self, nums: List[int]) -> int:
+        pass

@@ -6,4 +6,15 @@ from collections import defaultdict
 
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        pass
+        seen = defaultdict(list)
+        for s in strs:
+            cs = [0] * 26
+            for c in s:
+                cs[ord(c)-ord('a')] +=1
+            seen[tuple(cs)].append(s)
+
+
+        
+
+        return list(seen.values())
+        
