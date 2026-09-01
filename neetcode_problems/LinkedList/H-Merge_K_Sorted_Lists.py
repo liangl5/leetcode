@@ -1,5 +1,42 @@
-# Hint:
+# Hint: n*k is too slow, think about a min heap here
+# My initial solution of n*k was solid implementation wise, had optimizations but that only gets you
+# so far, need to recognize that a minheap is perfect for this problem as it allows us to always
+# get the smallest value in O(log k) time.
+
+from typing import List, Optional
+import heapq
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class NodeWrapper:
+    def __init__(self, node):
+        self.node = node
+
+    def __lt__(self, other):
+        return self.node.val < other.node.val
 
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-        pass
+        if len(lists) == 0:
+            return None
+
+        res = ListNode(0)
+        cur = res
+        minHeap = []
+
+        for lst in lists:
+            if lst is not None:
+                heapq.heappush(minHeap, NodeWrapper(lst))
+
+        while minHeap:
+            node_wrapper = heapq.heappop(minHeap)
+            cur.next = node_wrapper.node
+            cur = cur.next
+
+            if node_wrapper.node.next:
+                heapq.heappush(minHeap, NodeWrapper(node_wrapper.node.next))
+
+        return res.next
